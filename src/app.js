@@ -136,3 +136,32 @@ function productExcludeSelf(array) {
 
     return output;
 }
+
+/* 1.6 Given two arrays of integers, find an intersection: where a common 
+ *      element exist in both arrays. We will only return a list of unique 
+ *      values for such intersections.
+ * */
+
+var array1 = [2, 2, 4, 1],
+    array2 = [1, 2, 0, 2];
+
+var result = intersection(array1, array2); 
+
+function intersection(array1, array2) {
+    var hashmap = {},
+        output = [];
+
+    array1.forEach(element => hashmap[element] = 1);
+
+    array2.forEach(element => {
+        if (hashmap[element] === 1) {
+            output.push(element);
+            hashmap[element]++;
+        }
+    });
+  
+    return output;
+}
+
+
+
