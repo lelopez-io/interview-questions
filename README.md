@@ -7,7 +7,7 @@
 `npm run start`
 
 ### test results
-`console.log(result);
+`console.log(result);`
 
 I store all the results in in the same variable. Go to the appropriate
 line and log out the value for 'result' imediately after calculating.
