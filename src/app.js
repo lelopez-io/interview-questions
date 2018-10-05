@@ -162,6 +162,43 @@ function intersection(array1, array2) {
     return output;
 }
 
+/* 1.7 Implement and iterative binary search
+**/
+
+var array1 = [0, 1, 2, 3, 4, 5, 6];
+var array2 = [1, 2, 3, 4, 5, 6];
+var array3 = [6, 5, 4, 3, 2, 1, 0];
+
+var result = itBinSearch(array1, 5); 
+var result = itBinSearch(array2, 0); 
+var result = itBinSearch(array3, 5); 
+
+
+
+function itBinSearch(array, value) {
+    var left = 0;
+    var right = array.length - 1;
+
+    while (left <= right) {
+        var pivot = Math.floor((left + right) / 2);
+        if (array[pivot] === value) {
+            // exit if the value has been found
+            return true;
+        } else if (value < array[pivot]) {
+            // search left of the pivot with the right most position becoming 
+            // one less than pivot
+            right = pivot - 1;
+        } else {
+            // search right of the pivot with the left most position becoming
+            // one greater than pivot
+            left = pivot + 1;
+        }
+    }
+
+    // if we exit the while loop then we didn't find the value
+    return false;
+}
+
 /* 2.1 Given a string, revers each word in the sentence, maintain the sentence 
  *      order though.
 **/
@@ -329,14 +366,22 @@ function decToBin(dec) {
 /* 4.2 Create a recursive function that will perform a binary search
 **/
 
+var array1 = [0, 1, 2, 3, 4, 5, 6];
+var array2 = [1, 2, 3, 4, 5, 6];
+var array3 = [6, 5, 4, 3, 2, 1, 0];
+
+var result = binSearch(array1, 5, 0, array1.length - 1); 
+var result = binSearch(array2, 0, 0, array1.length - 1); 
+var result = binSearch(array3, 5, 0, array1.length - 1); 
+
 function binSearch(array, value, left, right) {
     // if it isn't sorted then we exit due to error
-    if (left > right) return -1;
+    if (left > right) return false;
 
     var pivot = Math.floor((left + right) / 2);
     if (array[pivot] === value) {
         // Our exit condition is when we have found the value
-        return pivot;
+        return true;
     } else if (value < array[pivot]) {
         // search left of the pivot if value is less than current pivot
         // our right most value should then be pivot - 1
