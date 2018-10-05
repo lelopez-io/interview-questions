@@ -392,3 +392,34 @@ function binSearch(array, value, left, right) {
         return binSearch(array, value, pivot + 1, right);
     }
 }
+
+/* 5.1 Given an integer, determine if it is a power of 2. If so, return that
+ *      else return false. (0 is not a power of two)
+**/
+
+var result = isPowOfTwo(1); 
+var result = isPowOfTwo(4); 
+var result = isPowOfTwo(64); 
+var result = isPowOfTwo(2048); 
+var result = isPowOfTwo(0); 
+var result = isPowOfTwo(-1); 
+
+function isPowOfTwo(num) {
+    if (num === 0) return false;
+
+    // in binary powers of 2 are represented by 1 followed by an appropriate 
+    // amount of 0. If we subtract 1 all those 0s become 1s and the leading 1 
+    // becomes 0. This means a bit wise AND should return 0 if it is a power of 
+    // 2. The amount of 1s is also the power we need to get the original value
+
+    return ((num & (num - 1)) ===  0) ? findPow(num - 1) : false
+}
+
+function findPow(num) {
+    // exit condition if value is no longer divisable by 2
+    if (num < 1) return 0;
+
+    // else keep adding up the 1s
+    return findPow((num - 1) / 2) + 1;
+}
+
