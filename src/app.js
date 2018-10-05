@@ -174,10 +174,10 @@ function reverseAll(sentence) {
     return sentence.split("").reverse().join("").split(" ").reverse().join(" ");
 }
 
-/* 2.3 Given two strings, return true if they are anagrams of one another
+/* 2.2 Given two strings, return true if they are anagrams of one another
  * */
-var word1 = "Mary";
-var word2 = "Army";
+var word1 = "Mary",
+    word2 = "Army";
 
 var result = isAnagram(word1, word2);
 
@@ -189,11 +189,11 @@ function isAnagram(a, b) {
     return a === b;
 }
 
-/* 2.4 Given a string, return true if it is as palindrom
+/* 2.3 Given a string, return true if it is as palindrom
  *      function should be case insensitive and ignore spaces
  * */
-var word1 = "racecar";
-var word2 = "Race Car";
+var word1 = "racecar",
+    word2 = "Race Car";
 
 var result = isPalindrom(word1);
 var result = isPalindrom(word2);
@@ -205,3 +205,40 @@ function isPalindrom(a) {
 }
 
 
+/* 2.4 Given two strings, return true if they are isomorphic. Two strings are
+ *      isomorphic if the characters of one can be replaced to get the second.
+ * */
+
+var pair1 = ["egg", "add"],
+    pair2 = ["paper", "title"],
+    pair3 = ["kick", "side"];
+
+var result = isIsomorphic(pair1[0], pair1[1]);
+var result = isIsomorphic(pair2[0], pair2[1]);
+var result = isIsomorphic(pair3[0], pair3[1]);
+
+function isIsomorphic(a, b) {
+    // First they must be same length
+    if (a.length !== b.length) return false;
+
+    // Next check if all unique characters can be paired using a map
+    var pairMap = {};
+
+    for (var i = 0; i < a.length; i++) {
+        var letterA = a[i],
+            letterB = b[i];
+
+        if (pairMap[letterA] === undefined) {
+            // if we havn't came accross this letterA
+            // map it's value to the letterB
+            pairMap[letterA] = letterB;
+        } else if (pairMap[letterA] !== letterB) {
+            // if we have came across the letterA and it's value doesn't match
+            // the previously paired value letterB then it isn't isomorphic
+            return false;
+        }
+    }
+    // if it was able to iterate through the whole string without returning
+    // false then all unique values paired up meaning it is isomorphic
+    return true;
+}
