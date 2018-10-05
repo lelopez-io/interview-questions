@@ -163,5 +163,45 @@ function intersection(array1, array2) {
     return output;
 }
 
+/* 2.1 Given a string, revers each word in the sentence, maintain the sentence 
+ *      order though.
+ * */
+var sentence = "Welcome to this Javascript Guide!";
+var result = reverseAll(sentence);
+
+function reverseAll(sentence) {
+    // reverse the character order, then reverse the word order
+    return sentence.split("").reverse().join("").split(" ").reverse().join(" ");
+}
+
+/* 2.3 Given two strings, return true if they are anagrams of one another
+ * */
+var word1 = "Mary";
+var word2 = "Army";
+
+var result = isAnagram(word1, word2);
+
+function isAnagram(a, b) {
+    // make them lowercase, split to sort then join to compare
+    a = a.toLowerCase().split("").sort().join("");
+    b = b.toLowerCase().split("").sort().join("");
+
+    return a === b;
+}
+
+/* 2.4 Given a string, return true if it is as palindrom
+ *      function should be case insensitive and ignore spaces
+ * */
+var word1 = "racecar";
+var word2 = "Race Car";
+
+var result = isPalindrom(word1);
+var result = isPalindrom(word2);
+
+function isPalindrom(a) {
+    a = a.toLowerCase().replace(/\s/g, "");
+    var b = a.split("").reverse().join("");
+    return a === b;
+}
 
 
