@@ -326,4 +326,24 @@ function decToBin(dec) {
     }
 }
 
+/* 4.2 Create a recursive function that will perform a binary search
+**/
 
+function binSearch(array, value, left, right) {
+    // if it isn't sorted then we exit due to error
+    if (left > right) return -1;
+
+    var pivot = Math.floor((left + right) / 2);
+    if (array[pivot] === value) {
+        // Our exit condition is when we have found the value
+        return pivot;
+    } else if (value < array[pivot]) {
+        // search left of the pivot if value is less than current pivot
+        // our right most value should then be pivot - 1
+        return binSearch(array, value, left, pivot - 1);
+    } else {
+        // search right of the pivot if value is greater than current pivot
+        // our left most value should then be pivot + 1
+        return binSearch(array, value, pivot + 1, right);
+    }
+}
