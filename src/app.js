@@ -7,13 +7,13 @@
  *      4. Recursion
  *      5. Numbers
  *      6. JavaScript Specific
- * */
+**/
 
 
 
 /* 1.1 Given an array of unsorted integers, find the largest product yield from 
  *      three of the integers.
- * */
+**/
 var unsortedArray = [-10, 7, 29, 30, 5, -10, -70];
 var result = largestProduct(unsortedArray);
 
@@ -42,7 +42,7 @@ function sortIntegers(a, b) {
 
 /* 1.2 Given an array of unsorted integers, as well as the lower and upper bound
  *      find the missing number that would complete the series of numbers
- * */
+**/
 var arrayOfIntegers = [2, 5, 1, 4, 9, 6, 3, 7],
     upperBound = 9,
     lowerBound = 1;
@@ -64,8 +64,7 @@ function findMissingNumber(arrayOfIntegers, upperBound, lowerBound) {
 }
 
 /* 1.3 Given an array of unsorted integers, return an array of unique values
- * 
- * */
+**/
 var array = [1, 2, 3, 5, 1, 5, 9, 1, 2, 8];
 
 // ES6 Implementation - The Set object lets you store unique values of any type
@@ -82,7 +81,7 @@ function onlyUnique (value, index, self) {
 /* 1.4 Given an array of unsorted integers, return the largest difference where 
  *      the smaller number has a smaller index compared to the greater vaule 
  *      being subtracted.
- * */
+**/
 var array = [7, 8, 4, 9, 9, 15, 3, 1, 10];
 var result = findLargestDifference(array);
 
@@ -108,7 +107,7 @@ function findLargestDifference (array) {
 /* 1.5 Given an array of integers, return an array such that each index contains
  *      the product of all elements except the value at the index n of the 
  *      original array. No division and O(n) time
- * */
+**/
 var array1 = [2, 2, 4, 1],
     array2 = [0, 0, 0, 2],
     array3 = [-2, -2, -3, 2];
@@ -140,7 +139,7 @@ function productExcludeSelf(array) {
 /* 1.6 Given two arrays of integers, find an intersection: where a common 
  *      element exist in both arrays. We will only return a list of unique 
  *      values for such intersections.
- * */
+**/
 
 var array1 = [2, 2, 4, 1],
     array2 = [1, 2, 0, 2];
@@ -165,7 +164,7 @@ function intersection(array1, array2) {
 
 /* 2.1 Given a string, revers each word in the sentence, maintain the sentence 
  *      order though.
- * */
+**/
 var sentence = "Welcome to this Javascript Guide!";
 var result = reverseAll(sentence);
 
@@ -175,7 +174,7 @@ function reverseAll(sentence) {
 }
 
 /* 2.2 Given two strings, return true if they are anagrams of one another
- * */
+**/
 var word1 = "Mary",
     word2 = "Army";
 
@@ -191,7 +190,7 @@ function isAnagram(a, b) {
 
 /* 2.3 Given a string, return true if it is as palindrom
  *      function should be case insensitive and ignore spaces
- * */
+**/
 var word1 = "racecar",
     word2 = "Race Car";
 
@@ -207,7 +206,7 @@ function isPalindrom(a) {
 
 /* 2.4 Given two strings, return true if they are isomorphic. Two strings are
  *      isomorphic if the characters of one can be replaced to get the second.
- * */
+**/
 
 var pair1 = ["egg", "add"],
     pair2 = ["paper", "title"],
@@ -242,3 +241,89 @@ function isIsomorphic(a, b) {
     // false then all unique values paired up meaning it is isomorphic
     return true;
 }
+
+/* 3.1 Implement enqueue and dequeue using only two stacks
+ * 
+**/
+
+var inStack = [],
+    outStack = [];
+
+// For enqueue, push the items into the first stack
+function enqueue(stackInput, item) {
+    return stackInput.push(item);
+}
+
+// For dequeue, if we have an empty outStack we need to populate it in reverse
+// order from the inStack that way the first in is first out.
+function dequeue(stackInput, stackOuput) {
+    if (stackOuput.length <= 0) {
+        while(stackInput.length > 0) {
+            var elementToOutput = stackInput.pop();
+            stackOuput.push(elementToOutput);
+        }
+    }
+    // if we already have values in the outStack, just return the one at the 
+    // top of the stack, the way we populate this stack is that the oldest value
+    // is always at top. We don't add more values from the inStack until all 
+    // values from the outStack have been removed.
+    return stackOuput.pop();
+}
+
+/* 3.2 Create a function that will evaluate if a given expression has balanced
+ *      parentheses -- Using stacks.
+**/
+
+var exp1 = "{{}}{}{}",
+    exp2 = "{}{{}";
+
+var result = isBalanced(exp1);
+var result = isBalanced(exp2);
+
+function isBalanced(exp) {
+    // if empty return balanced
+    if (exp.length <= 0) return true;
+
+    var stack = [];
+    for (var i = 0; i < exp.length; i++) {
+        if (exp[i] === '{') {
+            stack.push(exp[i]);
+        } else if (exp[i] === '}') {
+            if (stack.length > 0) stack.pop();
+        } else {
+            return false;
+        }
+
+    }
+
+    if (stack.pop()) return false;
+    return true;
+}
+
+/* 4.1 Create a recursive function that will return the binary string of given
+ *      decimal value.
+**/
+
+var result = decToBin(3); 
+var result = decToBin(8); 
+var result = decToBin(1000); 
+
+function decToBin(dec) {
+    // exit condition if value is no longer divisable by 2
+    // we return a string at the end to ensure all values are concatenated
+    // instead of added
+    if (dec < 1) return '';
+
+    // otherwise check for a remainder. We build the string from right to left
+    if (dec % 2) {
+        // if it has a remainder we take a one and return it as part of the
+        // string, remove it from the dec value and continue checking
+        return decToBin((dec - 1) / 2) + 1;
+    } else {
+        // simarly, if no remainder we take a zero and return it as part of
+        // the string and continue checking until we can no longer divide
+        return decToBin(dec / 2) + 0;
+    }
+}
+
+
